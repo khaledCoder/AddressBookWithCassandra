@@ -1,0 +1,41 @@
+ function save(){
+    debugger;
+        var name =   document.getElementById('name').value;
+        var mobile =   document.getElementById('mobile').value;
+        debugger;
+        $.ajax({
+            url:"/App/CreateUser?name="+name+"&mobile="+mobile,
+            method : "POST",
+            data:$("#frmUsers").serialize(),
+            success : function(rowData){
+            debugger;
+            var parsed =  rowData;
+            $("#contact-result").append("<tr><td>"+parsed.Pk+"</td><td>"+parsed.Name+"</td> <td>"+parsed.Mobile+"</td><td><input type='button' class='btn-danger' value='delete' onclick='deleteRow("+parsed.Pk+");'/> </td><td><input type='button' value='View Details' class='btn-success' onclick='viewDetails("+parsed.Pk+");'/> </td></tr>")
+         }
+    });
+    }
+////////////////////////////////
+function updateData(){
+debugger;
+var id     =  document.getElementById('idUpdate').value;
+var name   =  document.getElementById('name').value;
+var mobile =  document.getElementById('mobile').value;
+
+debugger;
+$.ajax({
+url:"/App/UpdateUserInfo",
+method : "POST",
+data:$("#frmUsers").serialize(),
+success : function(){
+debugger;
+var e = $("#contact-row-" + id);
+ e[0].cells[1].innerHTML=name;
+e[0].cells[2].innerHTML=mobile;
+}
+});
+}
+
+//////////////////////
+<div class="col-sm-1">
+            <input class="form-control btn-success"   type="button" value="Update" >
+        </div>

@@ -1,0 +1,17 @@
+<form class="form-horizontal" action="" method="post">
+    <div class="form-group">
+        <label for="Name" class="col-sm-2">Name</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="Name" placeholder="Enter an Name" name="app">
+        </div>
+
+        <label for="Mobile" class="col-sm-2">Mobile</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" id="Mobile" placeholder="Enter an Mobile" name="app">
+        </div>
+        <div class="col-sm-2">
+            <input class="form-control btn-success"  type="submit" value="Save">
+        </div>
+    </div>
+
+</form>

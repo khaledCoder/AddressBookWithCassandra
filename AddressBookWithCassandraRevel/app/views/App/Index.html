@@ -1,0 +1,103 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+{{template "flash.html" .}}
+
+<header >
+  <div class="container">
+    <div class="row" >
+      <h1>Address Book</h1>
+    </div>
+  </div>
+</header>
+<body class="container">
+
+<form class="form-horizontal" action="/App/SaveUserInfo"  method="post" id="frmUsers">
+    <div class="form-group">
+        <div class="row">
+        <label for="Name" class="col-sm-1">Name</label>
+            <input type="hidden" class="form-control" value="welcome in hidden val" id="idUpdate" name="idUpdate">
+        <div class="col-sm-3">
+            {{with $field := field "name" .}}
+            <input type="text" class="form-control" id="name" placeholder="Enter an Name" name="{{$field.Name}}" value="{{$field.Flash}}"/><br/>
+            {{end}}
+        </div>
+
+            <label for="Mobile" class="col-sm-1">Mobile</label>
+        <div class="col-sm-3">
+
+            <input type="text" class="form-control" id="mobile" placeholder="Enter an Mobile" name="mobile">
+        </div>
+            <div class="col-sm-1">
+            <input class="form-control" style="background-color:blue;color:white" type="submit" value="Save">
+                </div>
+
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>mobile</th>
+    </tr>
+    </thead>
+    <tbody id="contact-result">
+    {{range .Contacts.Contacts}}
+    <tr id="contact-row-{{.Pk}}">
+        <td id="rowID">{{.Pk}}</td>
+        <td>{{.ContactName}}</td>
+        <td>{{.ContactPhone}}</td>
+        <td><input type="button" class="btn-danger" value="delete" onclick="deleteRow({{.Pk}});"/> </td>
+        <td><input type="button" class="btn-success" value="View Details" onclick="viewDetails({{.Pk}});"/> </td>
+    </tr>
+    {{end}}
+    </tbody>
+</table>
+</body>
+{{template "footer.html" .}}
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+function showAllUsers(){
+$.ajax({
+url:"/index",
+method : "POST",
+data:$("#frmusers").serialize(),
+success : function(){
+$("#details-page").hide();
+$("#allusers-page").show();
+}
+});
+}
+
+function viewDetails(rowData){
+debugger;
+$.ajax({
+url:"/App/FindContactByContactID?id="+rowData,
+method : "POST",
+success : function(rowData1){
+debugger;
+  var parsed  = rowData1;
+elemName = document.getElementById("name");
+elemName.value=parsed.ContactName;
+elemMobile = document.getElementById("mobile");
+elemMobile.value=parsed.ContactPhone;
+document.getElementById("idUpdate").value=parsed.Pk;
+}
+});
+}
+
+function deleteRow(rowData){
+debugger;
+$.ajax({
+url:"/App/DeleteContact?id="+rowData,
+method : "POST",
+success : function(id){
+debugger;
+$("#contact-row-" + id).remove();
+}
+});
+}
+
+</script>

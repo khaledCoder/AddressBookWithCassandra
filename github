@@ -1,0 +1,48 @@
+Steps:-
+------
+1- git status (to show modified files)
+2- git add -A  (add all files)
+3- git commit -m  "comment" 
+4- git push
+
+------------------------
+
+
+to know status:-
+------------
+git status	
+
+to switch between branches  :-
+------------------------------
+git checkout branch name (which you want to switch)
+
+to create new branch :-
+-----------------------
+git branch branch name
+
+
+add all files or add specific file:-
+---------------
+git add *   ||  git add (file name)
+
+
+commit:-
+-----------
+git commit -m  "comment in this commit ex:say changes which happened"
+
+to add files on github:-
+------------------------
+git remote add origin https://github.com/........   (link of your project)
+
+to pull request:-
+--------------
+git pull
+
+to push request:-
+--------------
+git push -u origin master
+
+to merge any changes in another branch:-
+---------------------------------------
+git merge (branch name) y3ny lw ana f branch w 3ayz a3ml merge mn branch tany 34an lw 7sal
+
